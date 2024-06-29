@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import discord
 import bot_bin.bot
 import qtoml as toml
 
@@ -8,6 +9,7 @@ class IvuBot(bot_bin.bot.Bot):
 		'jishaku',
 		'cogs.ivu',
 	]
+	intents = discord.Intents.all()
 
 def main():
 	with open('config.toml') as f:
