@@ -1,0 +1,4 @@
+discord.py >=2.4.0, <3.0.0
+jishaku @ git+https://github.com/Gorialis/jishaku.git
+bot_bin >=2.0.3, <3.0.0
+qtoml

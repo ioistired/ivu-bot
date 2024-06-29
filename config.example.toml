@@ -1,0 +1,6 @@
+[ids]
+required_role = 1234
+entry_channel = 5678
+
+[tokens]
+discord = '...'
