@@ -9,7 +9,11 @@ class IvuBot(bot_bin.bot.Bot):
 		'jishaku',
 		'cogs.ivu',
 	]
-	intents = discord.Intents.all()
+	def __init__(self, *args, **kwargs):
+		intents = discord.Intents.default()
+		intents.members = True
+		intents.message_content = True
+		super().__init__(*args, intents=intents, **kwargs)
 
 def main():
 	with open('config.toml') as f:
