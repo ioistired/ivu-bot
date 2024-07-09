@@ -20,7 +20,6 @@ class Ivu(commands.Cog):
 
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
-		print(1)
 		entry_channel_id = self.bot.config['ids']['entry_channel']
 		entry_channel = member.guild.get_channel(entry_channel_id)
 		if entry_channel is None:
