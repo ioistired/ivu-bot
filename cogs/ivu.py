@@ -1,5 +1,6 @@
 import base64
 import logging
+import asyncio
 import discord
 from discord.ext import commands
 
@@ -42,6 +43,10 @@ class Ivu(commands.Cog):
 			logger.error('Member joined but entry channel %s not found!', entry_channel_id)
 			return
 
+		# if we send the message too quickly, the user might not see it, if
+		# message history is disabled in the welcome channel
+		# (as it should be)
+		await asyncio.sleep(0.7)
 		await entry_channel.send(self.bot.config['entry_message'])
 
 	@commands.Cog.listener()
