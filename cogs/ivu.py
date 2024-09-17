@@ -3,6 +3,7 @@ import logging
 import asyncio
 import discord
 from discord.ext import commands
+from discord import app_commands
 
 logger = logging.getLogger('cogs.ivu')
 
@@ -38,19 +39,17 @@ class Ivu(commands.Cog):
 		await asyncio.sleep(0.7)
 		await entry_channel.send(self.bot.config['entry_message'])
 
-	@commands.Cog.listener()
-	async def on_message(self, message):
-		if message.author == self.bot.user:
+	@app_commands.command(name='password')
+	async def password_command(self, interaction, password: str):
+		if interaction.channel_id != self.bot.config['ids']['entry_channel']:
 			return
 
-		if message.channel.id != self.bot.config['ids']['entry_channel']:
+		if password not in self.passwords:
 			return
 
-		if message.content not in self.passwords:
-			return
-
-		role = message.guild.get_role(self.bot.config['ids']['grant_role'])
-		await message.author.add_roles(role)
+		role = interaction.guild.get_role(self.bot.config['ids']['grant_role'])
+		await interaction.user.add_roles(role)
+		await interaction.response.send_message('Thanks!', ephemeral=True)
 
 	@commands.command(name='set-password')
 	@commands.check(has_ivu_admin_role)
