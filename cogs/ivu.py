@@ -7,7 +7,7 @@ from discord.ext import commands
 logger = logging.getLogger('cogs.ivu')
 
 def has_ivu_admin_role(ctx):
-	role_id = ctx.bot.config['ids']['required_role']
+	role_id = ctx.bot.config['ids']['admin_role']
 	if ctx.author.get_role(role_id) is None:
 		raise commands.MissingRole(role_id)
 	return True
