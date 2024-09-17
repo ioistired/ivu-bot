@@ -18,22 +18,11 @@ class Ivu(commands.Cog):
 		# this doesn't need to be hashed or anything because it's not super sensitive
 		# storing it in plain text lets admins refer to it to hand out to new attendees
 		with open('password.txt') as f:
-			self.passwords = {f.read()}
+			self._set_password(f.read())
 
-	@property
-	def passwords(self):
-		return self._passwords
-
-	@passwords.setter
-	def passwords(self, passwords: set):
-		"""
-		accepts a set of length 1.
-		sets internal set to also contain the base64 encoded version of the given password.
-		"""
+	def _set_password(self, password):
 		# for CTF style fun
-		passwords = passwords.copy()
-		passwords.add(base64.b64encode(list(passwords)[0].encode()).decode())
-		self._passwords = passwords
+		self.passwords = {password, base64.b64encode(password.encode()).decode()}
 
 	@commands.Cog.listener()
 	async def on_member_join(self, member):
@@ -68,7 +57,7 @@ class Ivu(commands.Cog):
 	async def set_password(self, ctx, password):
 		with open('password.txt', 'w') as f:
 			f.write(password)
-		self.passwords = {password}
+		self._set_password(password)
 		await ctx.message.add_reaction(self.bot.config['success_emojis'][True])
 
 async def setup(bot):
