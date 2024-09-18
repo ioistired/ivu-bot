@@ -10,7 +10,7 @@ admin_role = 1234
 # the channel that newcomers will use to enter the password
 entry_channel = 5678
 # the role that will be granted to people that entered the password
-grant_role = 0987
+grant_role = 9876
 
 [tokens]
 discord = '...'
