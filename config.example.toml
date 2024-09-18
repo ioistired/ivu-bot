@@ -1,3 +1,7 @@
+# what to be sent in the entry channel when a new user joins
+entry_message = """
+"""
+
 [ids]
 # the role required to use the set-password command.
 # this doesn't actually need to have administrator permissions,
