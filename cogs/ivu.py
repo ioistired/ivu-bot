@@ -41,10 +41,8 @@ class Ivu(commands.Cog):
 
 	@app_commands.command(name='password')
 	async def password_command(self, interaction, password: str):
-		if interaction.channel_id != self.bot.config['ids']['entry_channel']:
-			return
-
 		if password not in self.passwords:
+			await interaction.response.send_message('Wrong password!', ephemeral=True)
 			return
 
 		role = interaction.guild.get_role(self.bot.config['ids']['grant_role'])
