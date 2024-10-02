@@ -11,6 +11,9 @@ admin_role = 1234
 entry_channel = 5678
 # the role that will be granted to people that entered the password
 grant_role = 9876
+# the role that will be removed when the grant role is granted
+# set to 0 to disable
+remove_role = 0
 
 [tokens]
 discord = '...'

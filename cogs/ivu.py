@@ -45,8 +45,13 @@ class Ivu(commands.Cog):
 			await interaction.response.send_message('Wrong password!', ephemeral=True)
 			return
 
-		role = interaction.guild.get_role(self.bot.config['ids']['grant_role'])
-		await interaction.user.add_roles(role)
+		grant_role = interaction.guild.get_role(self.bot.config['ids']['grant_role'])
+		await interaction.user.add_roles(grant_role)
+
+		if remove_role_id := self.bot.config['ids']['remove_role']:
+			remove_role = interaction.guild.get_role(remove_role_id)
+			await interaction.user.remove_roles(remove_role)
+
 		await interaction.response.send_message('Thanks!', ephemeral=True)
 
 	@commands.command(name='set-password')
